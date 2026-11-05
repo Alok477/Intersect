@@ -712,33 +712,6 @@ body::-webkit-scrollbar,
   }
 }
 
-.home-description {
-  width: min(430px, 100%);
-  margin: clamp(8px, 1.5vh, 14px) auto 0;
-  padding: 0 0 24px;
-}
-
-.home-description p {
-  max-width: 430px;
-  margin: 0;
-  color: var(--soft-text);
-  font-size: clamp(13px, 1.35vw, 15px);
-  line-height: 1.7;
-  text-align: center;
-}
-
-@media(max-width:650px) {
-  .home-description {
-    margin-top: 12px;
-    padding: 0 4px 24px;
-  }
-
-  .home-description p {
-    font-size: 13px;
-    line-height: 1.65;
-  }
-}
-
 .screen-transition {
   display: flex;
   flex: 1 0 auto;
@@ -787,4 +760,14 @@ body::-webkit-scrollbar,
     padding: 4px 7px;
     font-size: 9px;
   }
+}
+
+.app-shell {
+  isolation: isolate;
+}
+
+.app-topbar {
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }

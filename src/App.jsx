@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase, supabaseConfigured } from './lib/supabase';
 import darkBrandLogo from '../assets/intersect-logo-dark.svg';
 import lightBrandLogo from '../assets/intersect-logo-light.svg';
+import SideRays from './SideRays';
 
 const people = [
   { id: 'alex', name: 'Alex Morgan', age: 27, avatar: 'A', bio: 'Curious about quiet places, unexpected details, and people who notice them.', interests: ['Books', 'Films', 'Coffee'], preference: 'Friendship', prompt: 'What hobby could you talk about for hours?' },
@@ -231,6 +232,17 @@ function App() {
   if (authLoading) return <div className="auth-loading"><img className="auth-loading-logo" src={theme ? lightBrandLogo : darkBrandLogo} alt="" /><span>Loading your Intersect session…</span></div>;
   if (supabaseConfigured && !session) return <AuthScreen notice={authNotice} setNotice={setAuthNotice} theme={theme} />;
   return <div className={`app-shell ${theme ? 'light-theme' : ''}`}>
+    {data.screen === 'landing' && <div className="side-rays-backdrop" aria-hidden="true"><SideRays
+      rayColor1={theme ? '#003B94' : '#FFC46B'}
+      rayColor2={theme ? '#693700' : '#96c8ff'}
+      origin="top-right"
+      speed={2.5}
+      intensity={2}
+      spread={2}
+      density={5}
+      followMouse={true}
+      lightMode={theme}
+    /></div>}
     <header className="topbar app-topbar">
       <button className="brand" onClick={() => navigate('landing')} aria-label="Intersect home"><img className="brand-logo" src={theme ? lightBrandLogo : darkBrandLogo} alt="Intersect" /></button>
       <nav className="main-nav" aria-label="Main navigation">
@@ -275,7 +287,7 @@ function AuthScreen({ notice, setNotice, theme }) {
 }
 
 function Landing() {
-  return <main className="landing page-width"><section className="hero"><div className="eyebrow"><span className="eyebrow-dot" /> A different way to meet</div><h1>Intersect</h1><p className="hero-copy">Skip the small talk. Find people with shared interests, start something together, and see where the conversation takes.</p></section><section className="home-description"><p>Intersect is a social discovery platform that brings people together through shared interests, interactive hangouts, fun activities, and meaningful conversations. Designed to make connecting beyond swipes more engaging and natural.</p></section></main>;
+  return <main className="landing page-width"><section className="hero"><div className="eyebrow"><span className="eyebrow-dot" /> A different way to meet</div><h1>Intersect</h1><p className="hero-copy">Skip the small talk. Find people with shared interests, start something together, and see where the conversation takes.</p></section></main>;
 }
 
 function Page({ title, eyebrow, children, actions }) { return <main className="app-page page-width"><div className="page-heading"><div><div className="eyebrow"><span className="eyebrow-dot" /> {eyebrow}</div><h2>{title}</h2></div>{actions}</div>{children}</main>; }
