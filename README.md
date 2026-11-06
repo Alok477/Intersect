@@ -110,6 +110,25 @@ Never expose Supabase secret keys, service-role keys, database passwords, or oth
 4. Apply the required SQL setup.
 5. Verify the tables, permissions, and RLS policies.
 
+#### Messaging upgrade (replies, edits, reactions)
+
+After `schema.sql`, run [`supabase/migrations/002_messaging.sql`](./supabase/migrations/002_messaging.sql) once in the Supabase SQL Editor. It adds replies, message edit/delete, emoji reactions and DM stickers, and enables Realtime for the messaging tables. It is safe to re-run. Without it the app still works; those features are simply hidden.
+
+## 💬 Messaging
+
+The Messages screen is a single Discord-style workspace: community rail, channels and direct messages in one sidebar, member list / profile panel, and a quick switcher (`Ctrl/⌘ + K`).
+
+- Message grouping, day dividers, an unread marker, jump-to-latest, load earlier messages
+- Replies, emoji reactions, edit/delete your own messages (`↑` edits your last message)
+- `@mentions` with autocomplete, links, `**bold**`, `*italic*` and `` `code` ``
+- Online presence and typing indicators (Supabase Realtime, no extra tables)
+- Unread badges per channel/DM and on the Messages tab; mute any channel or DM
+- Drafts are kept per conversation; icebreakers on an empty DM, built from shared interests
+- Profile cards from any avatar, with Connect / Message depending on connection state
+- Mobile: one pane at a time with a back button, topbar hidden while chatting
+
+Code lives in `src/messages/`. Without Supabase credentials the same UI runs in local demo mode (data in `localStorage`).
+
 ### 5. Run the application
 
 ```bash
